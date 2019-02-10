@@ -45,4 +45,11 @@ func main() {
 
 	//sync
 	syncSample.PrintUseSync()
+
+	//use close
+	ch2 := make(chan int)
+	go channel.UseClose(ch2)
+	for v := range ch2 {
+		fmt.Println(v)
+	}
 }
