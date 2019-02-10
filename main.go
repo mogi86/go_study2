@@ -6,6 +6,7 @@ import (
 	"github.com/mogi86/go_study2/closure"
 	"github.com/mogi86/go_study2/construction"
 	"github.com/mogi86/go_study2/slice"
+	"github.com/mogi86/go_study2/syncSample"
 )
 
 func main() {
@@ -35,4 +36,13 @@ func main() {
 	for i := 0; i <= 100; i++ {
 		ch <- i
 	}
+
+	end1, end2 := make(chan bool), make(chan bool)
+	go channel.PrintNumber1(end1)
+	go channel.PrintNumber2(end2)
+	<-end1
+	<-end2
+
+	//sync
+	syncSample.PrintUseSync()
 }

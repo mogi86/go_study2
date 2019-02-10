@@ -8,3 +8,17 @@ func Receiver(ch <-chan int) {
 		fmt.Println("channel:", i)
 	}
 }
+
+func PrintNumber1(ch chan bool) {
+	for i := 0; i <= 10; i++ {
+		fmt.Println("並行1:", i)
+	}
+	ch <- true
+}
+
+func PrintNumber2(ch chan bool) {
+	for i := 0; i <= 10; i++ {
+		fmt.Println("並行2:", i)
+	}
+	ch <- true
+}
