@@ -24,6 +24,7 @@ func main() {
 	f()
 	f()
 
+	//Structs
 	c := construction.Vertex1{1, 9}
 	c.SetX(1000)
 	fmt.Println(c.Calc())
@@ -40,6 +41,7 @@ func main() {
 	end1, end2 := make(chan bool), make(chan bool)
 	go channel.PrintNumber1(end1)
 	go channel.PrintNumber2(end2)
+	//チャネルに書き込まれるまで待機する
 	<-end1
 	<-end2
 
@@ -52,4 +54,20 @@ func main() {
 	for v := range ch2 {
 		fmt.Println(v)
 	}
+
+	//それぞれチャネルの呼び出される割合確認
+	cnt3, cnt4 := 0, 0
+	ch3, ch4 := make(chan int), make(chan int)
+	close(ch3)
+	close(ch4)
+	for j := 0; j < 1000; j++ {
+		select {
+		case <-ch3:
+			cnt3++
+		case <-ch4:
+			cnt4++
+		}
+	}
+	fmt.Println("cnt3の回数:", cnt3)
+	fmt.Println("cnt4の回数:", cnt4)
 }
