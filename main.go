@@ -9,6 +9,8 @@ import (
 	"github.com/mogi86/go_study2/syncSample"
 )
 
+//standard package: https://golang.org/pkg/
+
 func main() {
 	fmt.Println("Hello, 世界")
 
