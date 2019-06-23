@@ -5,6 +5,7 @@ import (
 	"github.com/mogi86/go_study2/channel"
 	"github.com/mogi86/go_study2/closure"
 	"github.com/mogi86/go_study2/construction"
+	"github.com/mogi86/go_study2/pkg_math"
 	"github.com/mogi86/go_study2/slice"
 	"github.com/mogi86/go_study2/syncSample"
 )
@@ -72,4 +73,9 @@ func main() {
 	}
 	fmt.Println("cnt3の回数:", cnt3)
 	fmt.Println("cnt4の回数:", cnt4)
+
+	//-------------
+	//standard pkg
+	//-------------
+	pkg_math.PrintMath()
 }
