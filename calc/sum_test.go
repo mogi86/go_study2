@@ -1,6 +1,8 @@
 package calc
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestSum(t *testing.T) {
 	result := Sum(10, 20)
@@ -10,4 +12,10 @@ func TestSum(t *testing.T) {
 	}
 
 	t.Logf("result is a %d", result)
+}
+
+func BenchmarkSum(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Sum(10, 20)
+	}
 }
