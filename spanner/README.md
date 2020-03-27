@@ -4,8 +4,8 @@
 
 ```bash
 $ export GCP_PROJECT_ID=[your gcp project id]
-$ export SPANNER_INSTANCE_ID=[your Spanner instance name]
-$ export SPANNER_DB_ID=[your Spanner dn name]
+$ export SPANNER_INSTANCE_ID=[your Spanner instance id]
+$ export SPANNER_DB_ID=[your Spanner db id]
 ```
 
 ## Execute
