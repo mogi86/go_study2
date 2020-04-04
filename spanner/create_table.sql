@@ -5,3 +5,5 @@ CREATE TABLE Books (
   CreatedAt TIMESTAMP NOT NULL OPTIONS (allow_commit_timestamp=true),
   UpdatedAt TIMESTAMP NOT NULL OPTIONS (allow_commit_timestamp=true),
 ) PRIMARY KEY (BookId);
+
+CREATE INDEX BooksByName ON Books (Name);
