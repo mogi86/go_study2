@@ -104,6 +104,67 @@ func write(ctx context.Context, client *spanner.Client, entity *Entity) error {
 	return err
 }
 
+// Simple mutation
+func writeWithMutation(ctx context.Context, client *spanner.Client) error {
+	// Insert (table name, column name, values)
+	m1 := spanner.Insert("Users",
+		[]string{"name", "email"},
+		[]interface{}{"alice", "a@example.com"})
+
+	// Insert (table name, map{column name: value})
+	m2 := spanner.InsertMap("Users", map[string]interface{}{
+		"name":  "alice",
+		"email": "a@example.com",
+	})
+
+	// Use Struct
+	type User struct { Name, Email string }
+	u := User{Name: "alice", Email: "a@example.com"}
+	m3, err := spanner.InsertStruct("Users", u)
+
+	if err != nil {
+		return err
+	}
+
+	//Apply list of mutation
+	_, err = client.Apply(ctx, []*spanner.Mutation{m1, m2, m3})
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// Use ReadWriteTransaction()
+// The record is got before write
+func writeWithMutationByReadWriteTransaction(ctx context.Context, client *spanner.Client, txn *spanner.ReadWriteTransaction) error {
+	var balance int64
+	row, err := txn.ReadRow(ctx, "Accounts", spanner.Key{"alice"}, []string{"balance"})
+	if err != nil {
+		// This function will be called again if this is an IsAborted error.
+		return err
+	}
+	if err := row.Column(0, &balance); err != nil {
+		return err
+	}
+
+	if balance <= 10 {
+		return errors.New("insufficient funds in account")
+	}
+	balance -= 10
+	m := spanner.Update("Accounts", []string{"user", "balance"}, []interface{}{"alice", balance})
+	err = txn.BufferWrite([]*spanner.Mutation{m})
+	if err != nil {
+		return nil
+	}
+
+	// The buffered mutation will be committed.  If the commit
+	// fails with an IsAborted error, this function will be called
+	// again.
+	return nil
+}
+
 func read(ctx context.Context, client *spanner.Client) error {
 	//row, err := client.Single().ReadRow(ctx, "Accounts", spanner.Key{"alice"}, []string{"balance"})
 
