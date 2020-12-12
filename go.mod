@@ -5,6 +5,7 @@ go 1.15
 require (
 	cloud.google.com/go/pubsub v1.3.1
 	cloud.google.com/go/spanner v1.4.0
+	github.com/google/go-cmp v0.5.4
 	github.com/google/uuid v1.1.1
 	github.com/satori/go.uuid v1.2.0
 	github.com/xeipuuv/gojsonpointer v0.0.0-20180127040702-4e3ac2762d5f // indirect
