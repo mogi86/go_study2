@@ -118,7 +118,7 @@ func writeWithMutation(ctx context.Context, client *spanner.Client) error {
 	})
 
 	// Use Struct
-	type User struct { Name, Email string }
+	type User struct{ Name, Email string }
 	u := User{Name: "alice", Email: "a@example.com"}
 	m3, err := spanner.InsertStruct("Users", u)
 

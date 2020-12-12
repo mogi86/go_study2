@@ -9,13 +9,13 @@ var wg sync.WaitGroup
 
 func PrintUseSync() {
 	wg.Add(1)
-	go func () {
+	go func() {
 		wg.Done()
 		fmt.Println("syncSample1")
 	}()
 
 	wg.Add(1)
-	go func () {
+	go func() {
 		wg.Done()
 		fmt.Println("syncSample2")
 	}()
