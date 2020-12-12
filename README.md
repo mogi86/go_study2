@@ -2,28 +2,13 @@
 
 ## Description
 
-golangの勉強用リポジトリ。
-ローカルのmacで動作させることを想定している。
-
-## Requirement
-
-* go >= 1.11
-
-## Setup
-
-* set GOPATH
-
-```
-$ export GOPATH=$HOME/go
-```
-
-* dep install
-
-```
-$ go get -u github.com/golang/dep/cmd/dep
-```
+- Project for learn Golang.
+- It assumes to run in local.
 
 ## Execute
+
+- There are some `main` function.
+- For example, execute below command if you want to run `main.go` of package root.
 
 ```
 $ go run main.go
