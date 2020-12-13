@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
 type A struct {
@@ -25,5 +27,7 @@ func main() {
 	}
 
 	fmt.Println(cmp.Equal(a1, a2))
+	fmt.Println(cmp.Equal(a1, a2, cmpopts.IgnoreFields(A{}, "Price", "Description")))
+
 	fmt.Println(cmp.Diff(a1, a2))
 }
